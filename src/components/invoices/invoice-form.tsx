@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { X, Plus } from "lucide-react"
 import { useRouter } from "next/navigation"
+import {Switch} from "@heroui/switch";
 
 interface InvoiceFormProps {
   initialData?: Invoice
@@ -30,9 +31,9 @@ export function InvoiceForm({ initialData, onSubmit, isLoading }: InvoiceFormPro
     due_date: initialData?.due_date || "",
     line_items: initialData?.line_items || [{ description: "", quantity: 1, cost: 0, sort_order: 0 }],
     discount: initialData?.discount || 0,
-    notes: initialData?.notes || "",
-    terms: initialData?.terms || "",
-    public_notes: initialData?.public_notes || "",
+    // notes: initialData?.notes || "",
+    // terms: initialData?.terms || "",
+    // public_notes: initialData?.public_notes || "",
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -67,10 +68,24 @@ export function InvoiceForm({ initialData, onSubmit, isLoading }: InvoiceFormPro
     })
   }
 
-  const calculateTotal = () => {
-    const subtotal = formData.line_items.reduce((sum, item) => sum + item.quantity * item.cost, 0)
-    return subtotal - formData.discount
+
+  // const handlePercentClick = () => {
+  //   let subtotal = formData.line_items.reduce((sum, item) => sum + item.quantity * item.cost, 0)
+  //   subtotal = subtotal - subtotal * (formData.discount/100)
+  //   console.log(subtotal)
+  //   return subtotal
+  // }
+
+
+
+  const totalamount = () => {
+    // if () {
+      
+    // }
   }
+  
+
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -133,13 +148,27 @@ export function InvoiceForm({ initialData, onSubmit, isLoading }: InvoiceFormPro
           </div>
           <div>
             <Label htmlFor="discount">Discount</Label>
-            <Input
+            <div className="flex">
+              <Input
               id="discount"
               type="number"
-              step="0.01"
+              // step="0.1"
+              
+              min={0}
               value={formData.discount}
               onChange={(e) => setFormData((prev) => ({ ...prev, discount: Number.parseFloat(e.target.value) }))}
             />
+                    <Switch
+                      defaultSelected
+                      // color="secondary"
+                      size="sm"
+                      onChange={totalamount}
+                      thumbIcon={({isSelected, className}) =>
+                        isSelected ? "%" : "₹"
+                      }
+                    >
+                    </Switch>
+            </div>
           </div>
         </div>
       </Card>
@@ -235,7 +264,7 @@ export function InvoiceForm({ initialData, onSubmit, isLoading }: InvoiceFormPro
         <div className="flex justify-between items-center">
           <div>
             <p className="text-sm text-muted-foreground">Total Amount</p>
-            <p className="text-3xl font-bold">${calculateTotal().toFixed(2)}</p>
+            <p className="text-3xl font-bold">${totalamount()}</p>
           </div>
           <div className="flex gap-4">
             <Button type="button" variant="outline" onClick={() => router.back()}>

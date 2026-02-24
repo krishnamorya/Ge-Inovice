@@ -7,8 +7,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import { useInvoices } from "@/hooks"
-import { invoicesApi } from "@/api"
-import type { Invoice } from "@/src/model"
+import { invoicesApi } from "@/api/invoices"
+import type { Invoice } from "@/src/model/invoice"
 import { InvoiceForm } from "@/components/invoices/invoice-form"
 
 export default function EditInvoicePage() {

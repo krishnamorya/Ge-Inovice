@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Eye, Edit2, Trash2, Send } from "lucide-react"
 import Link from "next/link"
 import { formatCurrency, formatDate } from "@/lib/format"
-import { useInvoices } from "@/src/hooks/use-invoices"
+// import { useInvoices } from "@/src/hooks/use-invoices"
 
 interface InvoiceTableProps {
   invoices: Invoice[]
@@ -39,9 +39,6 @@ export function InvoiceTable({ invoices, onDelete, onSend, isLoading }: InvoiceT
         return "default"
     }
   }
-
-  const fetchInvoices = useInvoices().fetchInvoices
-  console.log("From Invoice Table:", fetchInvoices)
 
   if (isLoading) {
     return <div className="p-8 text-center text-muted-foreground">Loading invoices...</div>
@@ -76,10 +73,10 @@ export function InvoiceTable({ invoices, onDelete, onSend, isLoading }: InvoiceT
         </TableHeader>
         <TableBody>
           {invoices.map((invoice) => (
-            <TableRow key={invoice.id}>
-              <TableCell className="font-medium">{invoice.invoice_number}</TableCell>
+            <TableRow key={invoice._id}>
+              <TableCell className="font-medium">{invoice._id}</TableCell>
               <TableCell>{invoice.client_id}</TableCell>
-              <TableCell>{formatCurrency(invoice.amount)}</TableCell>
+              <TableCell>{formatCurrency(invoice.discount)}</TableCell>
               <TableCell>
                 <Badge variant={getStatusColor(invoice.status)}>{invoice.status}</Badge>
               </TableCell>
@@ -87,12 +84,12 @@ export function InvoiceTable({ invoices, onDelete, onSend, isLoading }: InvoiceT
               <TableCell>{formatDate(invoice.due_date)}</TableCell>
               <TableCell className="text-right">
                 <div className="flex justify-end gap-2">
-                  <Link href={`/invoices/${invoice.id}`}>
+                  <Link href={`/invoices/${invoice._id}`}>
                     <Button variant="ghost" size="sm">
                       <Eye size={16} />
                     </Button>
                   </Link>
-                  <Link href={`/invoices/${invoice.id}/edit`}>
+                  <Link href={`/invoices/${invoice._id}/edit`}>
                     <Button variant="ghost" size="sm">
                       <Edit2 size={16} />
                     </Button>

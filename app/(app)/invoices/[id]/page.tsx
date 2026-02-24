@@ -6,8 +6,8 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { invoicesApi } from "@/api"
-import type { Invoice } from "@/src/model"
+import { invoicesApi } from "@/api/invoices"
+import type { Invoice } from "@/src/model/invoice"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -155,11 +155,11 @@ export default function InvoiceDetailPage() {
           <div className="space-y-3 text-sm">
             <div>
               <p className="text-muted-foreground">Current Status</p>
-              <Badge variant={getStatusColor(invoice.status)} className="mt-2">
+              {/* <Badge variant={getStatusColor(invoice.status)} className="mt-2">
                 {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
-              </Badge>
+              </Badge> */}
             </div>
-            {invoice.sent_at && (
+            {/* {invoice.sent_at && (
               <div>
                 <p className="text-muted-foreground">Sent</p>
                 <p className="font-medium">{formatDate(invoice.sent_at)}</p>
@@ -170,7 +170,7 @@ export default function InvoiceDetailPage() {
                 <p className="text-muted-foreground">Paid</p>
                 <p className="font-medium">{formatDate(invoice.paid_at)}</p>
               </div>
-            )}
+            )} */}
           </div>
         </Card>
       </div>
@@ -201,25 +201,7 @@ export default function InvoiceDetailPage() {
       </Card>
 
       {/* Notes */}
-      {(invoice.notes || invoice.public_notes) && (
-        <Card className="p-6">
-          <h3 className="font-semibold mb-4">Notes</h3>
-          <div className="space-y-4">
-            {invoice.notes && (
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Private Notes</p>
-                <p className="text-sm">{invoice.notes}</p>
-              </div>
-            )}
-            {invoice.public_notes && (
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Public Notes</p>
-                <p className="text-sm">{invoice.public_notes}</p>
-              </div>
-            )}
-          </div>
-        </Card>
-      )}
+      
     </div>
   )
 }

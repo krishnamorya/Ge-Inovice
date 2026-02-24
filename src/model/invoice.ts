@@ -4,14 +4,14 @@ import mongoose, { Document, Schema, Types, ArrayExpression } from "mongoose"
 export interface Invoice extends Document {
   _id: Types.ObjectId
   company_id: string
-  client_id?: string
+  client_id: string
   invoice_number?: String
   invoice_date: string
   due_date: string
-  status: InvoiceStatus
-  line_items: InvoiceLineItem[]
+  status?: InvoiceStatus
+  line_items?: InvoiceLineItem[]
   discount: number
-  amount?: number
+  amount: number
   balance?: number
   paid_amount: number
   currency_id?: string
@@ -110,10 +110,11 @@ export interface CreateInvoicePayload {
   due_date: string
   line_items: InvoiceLineItem[]
   discount?: number
-  notes?: string
-  terms?: string
-  public_notes?: string
+  // notes?: string
+  // terms?: string
+  // public_notes?: string
   status?: InvoiceStatus
+  // amount: number
 }
 
 

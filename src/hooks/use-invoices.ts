@@ -33,22 +33,32 @@ export function useInvoices(options: UseInvoicesOptions = {}) {
       setIsLoading(true)
       setError(null)
 
-      const response = await invoicesApi.getInvoices({
-        ...options,
-        ...newOptions,
-      })
+      try {
+        const response = await invoicesApi.getInvoices({
+          ...options,
+          ...newOptions,
+        })
+        console.log(response)
 
-      if (response.success && response.data) {
-        setInvoices(response.data.data)
-        setPagination(response.data.meta)
-      } else {
-        setError(response.error || "Failed to fetch invoices")
+        if (response.success && response.data) {
+          setInvoices(response.data)
+          setPagination(response.data.meta)
+        } else {
+          setError(response.error || "Failed to fetch invoices")
+        }
+        console.log("Invoice from use-invoice", invoices)
+
+        return response
+      } catch (err) {
+        setError("Something went wrong while fetching invoices")
+        throw err
+      } finally {
+        setIsLoading(false)
       }
-
-      setIsLoading(false)
     },
     [options],
-  )
+)
+
 
   const createInvoice = useCallback(
     async (payload: CreateInvoicePayload) => {

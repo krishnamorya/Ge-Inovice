@@ -84,12 +84,12 @@ export async function GET(request: NextRequest) {
     }
 
     const userId = decoded.userId
-    console.log(userId)
+    // console.log(userId)
 
 
     // fetch data
     const invoices = await InvoiceModel.find({ company_id: userId})
-    console.log(invoices)
+    // console.log(invoices)
     return NextResponse.json({ data: invoices })
   } catch (error) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
