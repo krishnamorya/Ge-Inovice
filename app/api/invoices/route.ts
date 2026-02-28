@@ -63,8 +63,6 @@ import { NextRequest, NextResponse } from "next/server"
 import  dbConnect  from "@/lib/dbConnect"
 import InvoiceModel from "@/src/model/invoice"
 import jwt from "jsonwebtoken"
-import { any } from "zod"
-import { stringify } from "querystring"
 
 export async function GET(request: NextRequest) {
   console.log("Get invoice root api called")

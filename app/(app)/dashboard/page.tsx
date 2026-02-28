@@ -25,17 +25,20 @@ export default function DashboardPage() {
   }, [])
 
   // Calculate stats from invoices
-  // useEffect(() => {
-  //   const newStats = {
-  //     total_invoiced: invoices.reduce((sum, inv) => sum + inv.amount, 0),
-  //     total_paid: invoices.filter((inv) => inv.status === "paid").reduce((sum, inv) => sum + inv.amount, 0),
-  //     total_pending: invoices
-  //       .filter((inv) => ["draft", "sent", "viewed"].includes(inv.status))
-  //       .reduce((sum, inv) => sum + inv.balance, 0),
-  //     total_overdue: 0, // Would need date logic
-  //   }
-  //   setStats(newStats)
-  // }, [invoices])
+  useEffect(() => {
+    const newStats = {
+      total_invoiced: invoices.reduce((sum, inv) => sum + inv.amount, 0),
+      total_paid: invoices.filter((inv) => inv.status === "paid").reduce((sum, inv) => sum + inv.amount, 0),
+      total_pending: invoices
+        .filter((inv) => inv.status === "pending")
+        .reduce((sum, inv) => sum + inv.amount - inv.paid_amount, 0),
+      total_overdue: 0, // Would need date logic
+    }
+    setStats(newStats)
+
+  }, [invoices])
+  
+  console.log(stats)
 
   return (
     <div className="p-8">
@@ -80,7 +83,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground mb-1">Total Invoices</p>
-              {/* <p className="text-2xl font-bold">{invoices.length}</p> */}
+               <p className="text-2xl font-bold">{invoices.length}</p> 
             </div>
             <FileText className="text-primary opacity-20" size={32} />
           </div>
@@ -90,7 +93,7 @@ export default function DashboardPage() {
       {/* Recent Invoices */}
       <Card className="p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Invoices</h2>
-        {/* <InvoiceTable invoices={invoices} isLoading={isLoading} /> */}
+         <InvoiceTable invoices={invoices} isLoading={isLoading} /> 
       </Card>
     </div>
   )

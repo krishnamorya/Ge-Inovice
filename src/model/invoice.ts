@@ -46,8 +46,8 @@ const invoiceSchema = new Schema<Invoice>(
     },
     status: {
       type: String,
-      enum: ["draft", "sent", "paid", "overdue"],
-      default: "draft",
+      enum: ["draft", "sent", "paid", "pending", "overdue"],
+      default: "paid",
     },
     line_items: {
       type: Array,
@@ -57,10 +57,10 @@ const invoiceSchema = new Schema<Invoice>(
       type: Number,
       default: 0,
     },
-    // amount: {
-    //   type: Number,
-    //   required: true,
-    // },
+    amount: {
+      type: Number,
+      required: true,
+    },
     paid_amount: {
       type: Number,
       default: 0,
@@ -84,6 +84,7 @@ const invoiceSchema = new Schema<Invoice>(
 
 export enum InvoiceStatus {
   DRAFT = "draft",
+  PENDING = "pending",
   SENT = "sent",
   VIEWED = "viewed",
   PARTIAL = "partial",

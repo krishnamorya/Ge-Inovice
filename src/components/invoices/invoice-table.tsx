@@ -76,7 +76,7 @@ export function InvoiceTable({ invoices, onDelete, onSend, isLoading }: InvoiceT
             <TableRow key={invoice._id}>
               <TableCell className="font-medium">{invoice._id}</TableCell>
               <TableCell>{invoice.client_id}</TableCell>
-              <TableCell>{formatCurrency(invoice.discount)}</TableCell>
+              <TableCell>{formatCurrency(invoice.amount)}</TableCell>
               <TableCell>
                 <Badge variant={getStatusColor(invoice.status)}>{invoice.status}</Badge>
               </TableCell>
