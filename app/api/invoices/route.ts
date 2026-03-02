@@ -84,11 +84,39 @@ export async function GET(request: NextRequest) {
     const userId = decoded.userId
     // console.log(userId)
 
+    const searchParams = request.nextUrl.searchParams
 
+    const status = searchParams.get("status")
+    const page = Number(searchParams.get("page") || 1)
+    const per_page = Number(searchParams.get("per_page") || 10)
+    const client_id = searchParams.get("client_id")
+    const sort = searchParams.get("sort") || "createdAt"
+    const order = searchParams.get("order") === "asc" ? 1 : -1
+
+    const filter : any = { company_id : userId }
+
+    if (status) filter.status = status
+    if (client_id) filter.status = client_id
+
+    const skip = (page - 1) * per_page
     // fetch data
-    const invoices = await InvoiceModel.find({ company_id: userId})
-    // console.log(invoices)
-    return NextResponse.json({ data: invoices })
+    const invoices = await InvoiceModel.find(filter)
+    .sort({ [sort]: order})
+    .skip(skip)
+    .limit(per_page)
+
+
+    console.log("Invoices are", invoices)
+    const total = await InvoiceModel.countDocuments(filter)
+    return NextResponse.json({ data: invoices ,
+       pagination: {
+        total,
+        page,
+        per_page,
+        total_pages: Math.ceil(total / per_page),
+      },
+    }
+    )
   } catch (error) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }

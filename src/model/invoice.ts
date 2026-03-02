@@ -86,7 +86,7 @@ export enum InvoiceStatus {
   DRAFT = "draft",
   PENDING = "pending",
   SENT = "sent",
-  VIEWED = "viewed",
+  // VIEWED = "viewed",
   PARTIAL = "partial",
   PAID = "paid",
   CANCELLED = "cancelled",

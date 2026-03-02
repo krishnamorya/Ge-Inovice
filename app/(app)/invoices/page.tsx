@@ -17,8 +17,13 @@ export default function InvoicesPage() {
   const [statusFilter, setStatusFilter] = useState<string>("")
 
   useEffect(() => {
-    fetchInvoices({ status: statusFilter || "draft" })
-  }, [statusFilter])
+  if (statusFilter) {
+    console.log("Status from page.tsx is: ", statusFilter)
+    fetchInvoices({ status: statusFilter })
+  } else {
+    fetchInvoices({})
+  }
+}, [statusFilter])
   console.log("Invoices from page.tsx:", invoices)
 
   const handleDelete = async (id: string) => {
@@ -61,7 +66,7 @@ export default function InvoicesPage() {
       {/* Filters */}
       <Card className="p-4 mb-6">
         <div className="flex gap-2">
-          {["", "draft", "sent", "viewed", "paid", "cancelled"].map((status) => (
+          {["", "draft", "sent", "pending", "paid"].map((status) => (
             <Button
               key={status}
               variant={statusFilter === status ? "default" : "outline"}

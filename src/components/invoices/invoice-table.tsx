@@ -27,7 +27,7 @@ export function InvoiceTable({ invoices, onDelete, onSend, isLoading }: InvoiceT
         return "secondary"
       case "sent":
         return "info"
-      case "viewed":
+      case "pending":
         return "warning"
       case "partial":
         return "warning"

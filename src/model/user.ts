@@ -121,7 +121,7 @@ export interface ClientContact {
 export enum InvoiceStatus {
   DRAFT = "draft",
   SENT = "sent",
-  VIEWED = "viewed",
+  // VIEWED = "viewed",
   PARTIAL = "partial",
   PAID = "paid",
   CANCELLED = "cancelled",
