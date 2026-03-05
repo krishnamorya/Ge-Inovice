@@ -12,7 +12,7 @@ import { InvoiceTable } from "@/components/invoices/invoice-table"
 import { FileText, DollarSign, Clock, TrendingUp } from "lucide-react"
 
 export default function DashboardPage() {
-  const { invoices, fetchInvoices, isLoading } = useInvoices({ per_page: 5 })
+  const { invoices, fetchInvoices, isLoading } = useInvoices()
   const [stats, setStats] = useState({
     total_invoiced: 0,
     total_paid: 0,
@@ -23,6 +23,8 @@ export default function DashboardPage() {
   useEffect(() => {
     fetchInvoices()
   }, [])
+
+  const tableInvoice = invoices.slice(0, 5)
 
   // Calculate stats from invoices
   useEffect(() => {
@@ -38,7 +40,6 @@ export default function DashboardPage() {
 
   }, [invoices])
   
-  console.log(stats)
 
   return (
     <div className="p-8">
@@ -93,7 +94,7 @@ export default function DashboardPage() {
       {/* Recent Invoices */}
       <Card className="p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Invoices</h2>
-         <InvoiceTable invoices={invoices} isLoading={isLoading} /> 
+         <InvoiceTable invoices={tableInvoice} isLoading={isLoading} /> 
       </Card>
     </div>
   )
