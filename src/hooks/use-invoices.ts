@@ -21,9 +21,9 @@ export function useInvoices(options: UseInvoicesOptions = {}) {
   const [invoices, setInvoices] = useState<Invoice[]>([])
   const [pagination, setPagination] = useState({
     current_page: 1,
-    per_page: 15,
+    per_page: 10,
     total: 0,
-    last_page: 1,
+    total_pages: 1,
   })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -38,15 +38,14 @@ export function useInvoices(options: UseInvoicesOptions = {}) {
           ...options,
           ...newOptions,
         })
-        console.log(response)
 
         if (response.success && response.data) {
-          setInvoices(response.data)
+          setInvoices(response.data.data)
           setPagination(response.data.meta)
         } else {
           setError(response.error || "Failed to fetch invoices")
         }
-        console.log("Invoice from use-invoice", invoices)
+
 
         return response
       } catch (err) {

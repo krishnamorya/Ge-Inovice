@@ -30,7 +30,7 @@ export default function ClientDashboardPage() {
         const [invoicesRes] = await Promise.all([invoicesApi.getInvoices()])
         // setInvoices(invoicesRes.data)
       } catch (error) {
-        console.error("Failed to load data:", error)
+        // console.error("Failed to load data:", error)
       } finally {
         setLoading(false)
       }

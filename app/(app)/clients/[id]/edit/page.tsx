@@ -22,7 +22,7 @@ export default function EditClientPage() {
         const data = await clientsApi.getClient(id)
         setClient(data)
       } catch (error) {
-        console.error("Failed to load client:", error)
+        // console.error("Failed to load client:", error)
       } finally {
         setLoading(false)
       }

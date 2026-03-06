@@ -13,25 +13,26 @@ import { InvoiceTable } from "@/components/invoices/invoice-table"
 import { Plus, FileText } from "lucide-react"
 
 export default function InvoicesPage() {
-  const { invoices, pagination, fetchInvoices, isLoading, deleteInvoice, sendInvoice } = useInvoices()
+  const { invoices, pagination, fetchInvoices, isLoading, deleteInvoice, sendInvoice } = useInvoices({per_page : 10}) 
   const [statusFilter, setStatusFilter] = useState<string>("")
+
 
   useEffect(() => {
   if (statusFilter) {
-    console.log("Status from page.tsx is: ", statusFilter)
+    // console.log("Status from page.tsx is: ", statusFilter)
     fetchInvoices({ status: statusFilter })
   } else {
     fetchInvoices({})
   }
 }, [statusFilter])
-  console.log("Invoices from page.tsx:", invoices)
+  // console.log("Invoices from page.tsx:", invoices)
 
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this invoice?")) {
       try {
         await deleteInvoice(id)
       } catch (error) {
-        console.error("Failed to delete invoice:", error)
+        // console.error("Failed to delete invoice:", error)
       }
     }
   }
@@ -41,9 +42,12 @@ export default function InvoicesPage() {
       await sendInvoice(id)
       alert("Invoice sent successfully!")
     } catch (error) {
-      console.error("Failed to send invoice:", error)
+      // console.error("Failed to send invoice:", error)
     }
   }
+
+// console.log("pagination data form app/invoice/page ;", pagination)
+console.log("pagination", pagination)
 
   return (
     <div className="p-8">
@@ -85,10 +89,10 @@ export default function InvoicesPage() {
       </Card>
 
       {/* Pagination */}
-      {/* {pagination.last_page > 1 && (
+      {pagination.total_pages > 1 && (
         <div className="mt-6 flex items-center justify-between">
           <p className="text-sm text-muted-foreground">
-            Page {pagination.current_page} of {pagination.last_page} ({pagination.total} total)
+            Page {pagination.current_page} of {pagination.total_pages} ({pagination.total} total)
           </p>
           <div className="flex gap-2">
             <Button
@@ -102,14 +106,15 @@ export default function InvoicesPage() {
             <Button
               variant="outline"
               size="sm"
-              disabled={pagination.current_page === pagination.last_page}
+              disabled={pagination.current_page === pagination.total_pages}
               onClick={() => fetchInvoices({ page: pagination.current_page + 1 })}
             >
               Next
             </Button>
           </div>
         </div>
-      )} */}
+        
+      )} 
     </div>
   )
 }

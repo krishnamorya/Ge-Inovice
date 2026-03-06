@@ -65,7 +65,6 @@ import InvoiceModel from "@/src/model/invoice"
 import jwt from "jsonwebtoken"
 
 export async function GET(request: NextRequest) {
-  console.log("Get invoice root api called")
   try {
     await dbConnect()
 
@@ -75,19 +74,21 @@ export async function GET(request: NextRequest) {
     }
 
     // verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string)
+    let decoded
 
-    if (typeof decoded === "string") {
-      throw new Error("Invalid token")
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET as string)
+    } catch {
+      return NextResponse.json({ error: "Invalid token" }, { status: 401 })
     }
 
-    const userId = decoded.userId
+    const userId = (decoded as any).userId
     // console.log(userId)
 
     const searchParams = request.nextUrl.searchParams
 
     const status = searchParams.get("status")
-    const page = Number(searchParams.get("page") || 1)
+    const current_page = Number(searchParams.get("page") || 1)
     const per_page = Number(searchParams.get("per_page") || 10)
     const client_id = searchParams.get("client_id")
     const sort = searchParams.get("sort") || "createdAt"
@@ -96,9 +97,9 @@ export async function GET(request: NextRequest) {
     const filter : any = { company_id : userId }
 
     if (status) filter.status = status
-    if (client_id) filter.status = client_id
+    if (client_id) filter.client_id = client_id
 
-    const skip = (page - 1) * per_page
+    const skip = (current_page - 1) * per_page
     // fetch data
     const invoices = await InvoiceModel.find(filter)
     .sort({ [sort]: order})
@@ -106,17 +107,21 @@ export async function GET(request: NextRequest) {
     .limit(per_page)
 
 
-    console.log("Invoices are", invoices)
     const total = await InvoiceModel.countDocuments(filter)
-    return NextResponse.json({ data: invoices ,
-       pagination: {
-        total,
-        page,
-        per_page,
-        total_pages: Math.ceil(total / per_page),
-      },
-    }
-    )
+
+
+    return NextResponse.json({
+      success: true,
+      data : {
+        data : invoices,
+        meta: {
+          total,
+          current_page,
+          per_page,
+          total_pages: Math.ceil(total / per_page),
+        }
+      }
+    })
   } catch (error) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }

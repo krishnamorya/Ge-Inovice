@@ -22,7 +22,7 @@ export default function ClientInvoiceDetailPage() {
         const data = await invoicesApi.getInvoice(id)
         setInvoice(data)
       } catch (error) {
-        console.error("Failed to load invoice:", error)
+        // console.error("Failed to load invoice:", error)
       } finally {
         setLoading(false)
       }

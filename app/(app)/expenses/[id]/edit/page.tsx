@@ -6,9 +6,9 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useParams } from "next/navigation"
-import { expensesApi } from "@/api"
+import  expensesApi  from "@/api/expensesApi"
 import { ExpenseForm } from "@/components/expenses/expense-form"
-import type { Expense } from "@/src/model"
+import type { Expense } from "@/src/model/user"
 
 export default function EditExpensePage() {
   const { id } = useParams() as { id: string }
@@ -22,7 +22,7 @@ export default function EditExpensePage() {
         const data = await expensesApi.getExpense(id)
         setExpense(data)
       } catch (error) {
-        console.error("Failed to load expense:", error)
+        // console.error("Failed to load expense:", error)
       } finally {
         setLoading(false)
       }
