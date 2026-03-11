@@ -1,0 +1,242 @@
+Folder structure for /home/krishna/Desktop/Inovice
+
+Inovice/
+├── app/
+│   ├── (app)/
+│   │   ├── clients/
+│   │   │   ├── [id]/
+│   │   │   │   ├── edit/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── dashboard/
+│   │   │   └── page.tsx
+│   │   ├── expenses/
+│   │   │   ├── [id]/
+│   │   │   │   └── edit/
+│   │   │   │   │   └── page.tsx
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── invoices/
+│   │   │   ├── [id]/
+│   │   │   │   ├── edit/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── settings/
+│   │   │   ├── profile/
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── (auth)/
+│   │   ├── login/
+│   │   │   └── page.tsx
+│   │   ├── register/
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── (client)/
+│   │   ├── client/
+│   │   │   ├── dashboard/
+│   │   │   │   └── page.tsx
+│   │   │   ├── invoices/
+│   │   │   │   └── [id]/
+│   │   │   │   │   └── page.tsx
+│   │   │   └── login/
+│   │   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── api/
+│   │   ├── auth/
+│   │   │   ├── login/
+│   │   │   │   └── route.ts
+│   │   │   ├── logout/
+│   │   │   │   └── route.ts
+│   │   │   ├── me/
+│   │   │   │   └── route.ts
+│   │   │   ├── refreshAccessToken/
+│   │   │   │   └── route.ts
+│   │   │   ├── register/
+│   │   │   │   └── route.ts
+│   │   │   └── updateUser/
+│   │   │   │   └── route.ts
+│   │   ├── clients/
+│   │   │   ├── [id]/
+│   │   │   │   └── route.ts
+│   │   │   └── route.ts
+│   │   ├── expenses/
+│   │   │   ├── [id]/
+│   │   │   │   └── route.ts
+│   │   │   └── route.ts
+│   │   ├── invoices/
+│   │   │   ├── [id]/
+│   │   │   │   ├── archive/
+│   │   │   │   │   └── route.ts
+│   │   │   │   ├── send/
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── route.ts
+│   │   │   └── route.ts
+│   │   ├── items/
+│   │   │   ├── [id]/
+│   │   │   └── route.ts
+│   │   └── payments/
+│   │   │   └── route.ts
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── clients/
+│   │   ├── client-form.tsx
+│   │   └── client-table.tsx
+│   ├── expenses/
+│   │   ├── expense-form.tsx
+│   │   └── expense-table.tsx
+│   ├── invoices/
+│   │   ├── invoice-form.tsx
+│   │   └── invoice-table.tsx
+│   ├── layout/
+│   │   ├── app-layout.tsx
+│   │   ├── header.tsx
+│   │   └── sidebar.tsx
+│   ├── profile/
+│   │   ├── account-info.tsx
+│   │   ├── password-form.tsx
+│   │   ├── profile-form.tsx
+│   │   └── settings-nav.tsx
+│   ├── ui/
+│   │   ├── accordion.tsx
+│   │   ├── alert-dialog.tsx
+│   │   ├── alert.tsx
+│   │   ├── aspect-ratio.tsx
+│   │   ├── avatar.tsx
+│   │   ├── badge.tsx
+│   │   ├── breadcrumb.tsx
+│   │   ├── button-group.tsx
+│   │   ├── button.tsx
+│   │   ├── calendar.tsx
+│   │   ├── card.tsx
+│   │   ├── carousel.tsx
+│   │   ├── chart.tsx
+│   │   ├── checkbox.tsx
+│   │   ├── collapsible.tsx
+│   │   ├── command.tsx
+│   │   ├── context-menu.tsx
+│   │   ├── dialog.tsx
+│   │   ├── drawer.tsx
+│   │   ├── dropdown-menu.tsx
+│   │   ├── empty.tsx
+│   │   ├── field.tsx
+│   │   ├── form.tsx
+│   │   ├── hover-card.tsx
+│   │   ├── input-group.tsx
+│   │   ├── input-otp.tsx
+│   │   ├── input.tsx
+│   │   ├── item.tsx
+│   │   ├── kbd.tsx
+│   │   ├── label.tsx
+│   │   ├── menubar.tsx
+│   │   ├── navigation-menu.tsx
+│   │   ├── pagination.tsx
+│   │   ├── popover.tsx
+│   │   ├── progress.tsx
+│   │   ├── radio-group.tsx
+│   │   ├── resizable.tsx
+│   │   ├── scroll-area.tsx
+│   │   ├── select.tsx
+│   │   ├── separator.tsx
+│   │   ├── sheet.tsx
+│   │   ├── sidebar.tsx
+│   │   ├── skeleton.tsx
+│   │   ├── slider.tsx
+│   │   ├── sonner.tsx
+│   │   ├── spinner.tsx
+│   │   ├── switch.tsx
+│   │   ├── table.tsx
+│   │   ├── tabs.tsx
+│   │   ├── textarea.tsx
+│   │   ├── toast.tsx
+│   │   ├── toaster.tsx
+│   │   ├── toggle-group.tsx
+│   │   ├── toggle.tsx
+│   │   ├── tooltip.tsx
+│   │   ├── use-mobile.tsx
+│   │   └── use-toast.ts
+│   └── theme-provider.tsx
+├── context/
+│   └── auth-context.tsx
+├── hooks/
+│   ├── use-clients.ts
+│   ├── use-expenses.ts
+│   ├── use-invoices.ts
+│   ├── use-mobile.ts
+│   ├── use-payments.ts
+│   └── use-toast.ts
+├── lib/
+│   ├── dbConnect.ts
+│   ├── format.ts
+│   └── utils.ts
+├── model/
+│   ├── invoice.ts
+│   └── user.ts
+├── public/
+│   ├── apple-icon.png
+│   ├── icon-dark-32x32.png
+│   ├── icon-light-32x32.png
+│   ├── icon.svg
+│   ├── placeholder-logo.png
+│   ├── placeholder-logo.svg
+│   ├── placeholder-user.jpg
+│   ├── placeholder.jpg
+│   └── placeholder.svg
+├── src/
+│   ├── api/
+│   │   ├── auth.ts
+│   │   ├── client.ts
+│   │   ├── expensesApi.ts
+│   │   └── invoices.ts
+│   ├── components/
+│   │   ├── clients/
+│   │   │   ├── client-form.tsx
+│   │   │   └── client-table.tsx
+│   │   ├── expenses/
+│   │   │   ├── expense-form.tsx
+│   │   │   └── expense-table.tsx
+│   │   ├── invoices/
+│   │   │   ├── invoice-form.tsx
+│   │   │   └── invoice-table.tsx
+│   │   ├── layout/
+│   │   │   ├── app-layout.tsx
+│   │   │   ├── header.tsx
+│   │   │   └── sidebar.tsx
+│   │   └── profile/
+│   ├── constants/
+│   │   └── api.ts
+│   ├── hooks/
+│   │   ├── index.ts
+│   │   ├── use-clients.ts
+│   │   ├── use-expenses.ts
+│   │   ├── use-invoices.ts
+│   │   └── use-payments.ts
+│   ├── lib/
+│   │   ├── format.ts
+│   │   └── utils.ts
+│   ├── model/
+│   │   ├── invoice.ts
+│   │   └── user.ts
+│   ├── schema/
+│   │   └── registerSchema.ts
+│   └── store/
+│   │   └── auth-context.tsx
+├── styles/
+│   └── globals.css
+├── components.json
+├── folder_structure.txt
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── README.md
+└── tsconfig.json

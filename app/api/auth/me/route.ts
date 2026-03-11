@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
 import dbConnect from "@/lib/dbConnect"
-import User from "@/src/model/user"
+import User from "@/model/user"
 
 export async function GET(request: NextRequest) {
   console.log("get me route called")

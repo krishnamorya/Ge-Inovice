@@ -13,7 +13,7 @@ export interface User extends Document {
   password: string
   first_name: string
   last_name: string
-  phone?: string
+  phone: string
   profile_picture?: string
   company_id?: string
   account_id?: string
@@ -21,6 +21,10 @@ export interface User extends Document {
   updated_at?: string
   refreshToken?: string
 }
+
+export type UpdateUserPayload = Partial<
+  Pick<User, "first_name" | "last_name" | "email" | "phone" | "profile_picture">
+>
 
 const userSchema : Schema<User> = new Schema({
   first_name: {
@@ -39,6 +43,10 @@ const userSchema : Schema<User> = new Schema({
     trim: true,
     unique: true,
     lowercase: true
+  },
+  phone: {
+    type: String,
+    required: true
   },
   password: {
     type: String,

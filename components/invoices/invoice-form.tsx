@@ -7,7 +7,7 @@
 import type React from "react"
 import { useMemo } from "react"
 import { useState } from "react"
-import type { Invoice, CreateInvoicePayload, InvoiceLineItem } from "@/src/model/invoice"
+import type { Invoice, CreateInvoicePayload, InvoiceLineItem } from "@/model/invoice"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"

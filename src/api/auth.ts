@@ -1,5 +1,5 @@
 import { apiClient } from "./client"
-import type { User } from "@/model/user"
+import type { UpdateUserPayload, User } from "@/model/user"
 
 export const authApi = {
   login: async (email: string, password: string) => {
@@ -35,6 +35,20 @@ export const authApi = {
 
     return response
   },
+
+  updateUser: async (updateData: UpdateUserPayload): Promise<User> => {
+
+  const response = await apiClient.patch<User>(
+    "/auth/updateUser",
+    updateData
+  )
+
+  if (!response.success || !response.data) {
+    throw new Error("Failed to update user")
+  }
+
+  return response.data
+},
 
   logout: async () => {
     const response = await apiClient.post("/auth/logout")

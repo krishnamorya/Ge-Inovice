@@ -7,7 +7,7 @@
 import { useRouter } from "next/navigation"
 import { useExpenses } from "@/hooks"
 import { formatCurrency, formatDate } from "@/lib/format"
-import type { ExpenseCategory } from "@/src/model"
+import type { ExpenseCategory } from "@/src/model/user"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 

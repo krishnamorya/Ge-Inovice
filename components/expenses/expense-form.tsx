@@ -7,8 +7,8 @@
 import type React from "react"
 
 import { useState } from "react"
-import { expensesApi } from "@/api"
-import type { Expense, ExpenseCategory } from "@/src/model"
+import  expensesApi  from "@/api/expensesApi"
+import type { Expense, ExpenseCategory } from "@/model/user"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 

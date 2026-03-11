@@ -63,7 +63,7 @@ export default function LoginPage() {
       // console.log("Logged in")
       router.push("/dashboard")
     } catch (error) {
-      setErrors({ form: error instanceof Error ? error.message : "Login failed" })
+      setErrors({ form: error instanceof Error ? error.message : `${authError}`})
     } finally {
       setIsLoading(false)
     }

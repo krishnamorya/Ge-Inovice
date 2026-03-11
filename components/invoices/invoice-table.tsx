@@ -4,7 +4,7 @@
 
 "use client"
 
-import type { Invoice } from "@/src/model/invoice"
+import type { Invoice } from "@/model/invoice"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"

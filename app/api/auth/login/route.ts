@@ -4,7 +4,7 @@
 
 import jwt from "jsonwebtoken"
 import dbConnect from "@/lib/dbConnect"
-import User from "@/src/model/user"
+import User from "@/model/user"
 import bcrypt from "bcryptjs"
 import { NextRequest, NextResponse } from "next/server"
 

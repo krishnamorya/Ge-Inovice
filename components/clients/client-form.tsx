@@ -7,8 +7,8 @@
 import type React from "react"
 
 import { useState } from "react"
-import type { Client } from "@/src/model/user"
-import { useClients } from "@/src/hooks/use-clients"
+import type { Client } from "@/model/user"
+import { useClients } from "@/hooks/use-clients"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 

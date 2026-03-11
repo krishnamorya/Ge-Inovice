@@ -7,9 +7,9 @@
 
 import type React from "react";
 import { createContext, useContext, useState, useEffect } from "react";
-import type { AuthState } from "@/src/model/user";
-import { authApi } from "../api/auth";
-import { apiClient } from "../api/client";
+import type { AuthState, UpdateUserPayload, User } from "@/model/user";
+import { authApi } from "@/src/api/auth";
+import { apiClient } from "@/src/api/client";
 
 interface AuthContextType extends AuthState {
   login: (
@@ -18,14 +18,16 @@ interface AuthContextType extends AuthState {
   ) => Promise<void>;
   register: (
     email: string,
+    phone: string,
     password: string,
     firstName: string,
     lastName: string,
     refreshToken: string
   ) => Promise<void>;
+  updateUser: (updatedData: UpdateUserPayload)=> Promise<User>;
   logout: () => Promise<void>;
   resetError: () => void;
-}
+} 
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -163,6 +165,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const updateUser = async (data: UpdateUserPayload): Promise<User> => {
+
+  const updatedUser = await authApi.updateUser(data)
+
+  setAuthState((prev) => ({
+    ...prev,
+    user: updatedUser
+  }))
+
+  return updatedUser
+};
+
   const resetError = () => {
     setAuthState((prev) => ({ ...prev, error: null }));
   };
@@ -172,6 +186,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         ...authState,
         login,
+        updateUser,
         register,
         logout,
         resetError,
