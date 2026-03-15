@@ -8,12 +8,15 @@ import { Label } from "@/components/ui/label"
 import { Camera, Loader2 } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+
 interface ProfileFormProps {
   user: User
   onSave: (user: UpdateUserPayload) => Promise<User>
 }
 
 export function ProfileForm({ user, onSave }: ProfileFormProps) {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
   const [formData, setFormData] = useState({
     first_name: user.first_name,
     last_name: user.last_name,
@@ -21,6 +24,7 @@ export function ProfileForm({ user, onSave }: ProfileFormProps) {
     phone: user.phone,
   })
   const [isSaving, setIsSaving] = useState(false)
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
   const [profilePicture, setProfilePicture] = useState(user.profile_picture || "")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +33,6 @@ export function ProfileForm({ user, onSave }: ProfileFormProps) {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log(user._id, "Is id from profile form")
     e.preventDefault()
     setIsSaving(true)
     try {
@@ -39,16 +42,45 @@ export function ProfileForm({ user, onSave }: ProfileFormProps) {
     }
   }
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setProfilePicture(reader.result as string)
+
+    if (!file) {
+      return
+    }
+
+    if (!cloudName || !uploadPreset) {
+      console.error("Missing Cloudinary configuration.")
+      return
+    }
+
+    setIsUploadingImage(true)
+
+    try {
+      const payload = new FormData()
+      payload.append("file", file)
+      payload.append("upload_preset", uploadPreset)
+
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: "POST",
+        body: payload,
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to upload image to Cloudinary.")
       }
-      reader.readAsDataURL(file)
+
+      const data = await response.json()
+      setProfilePicture(data.secure_url || "")
+    } catch (error) {
+      console.error("Cloudinary upload error:", error)
+    } finally {
+      setIsUploadingImage(false)
+      e.target.value = ""
     }
   }
+
+
 
   const getInitials = () => {
     return `${formData.first_name.charAt(0)}${formData.last_name.charAt(0)}`.toUpperCase()
@@ -78,6 +110,9 @@ export function ProfileForm({ user, onSave }: ProfileFormProps) {
             className="hidden"
             onChange={handleImageUpload}
           />
+          
+
+
         </div>
         <div className="text-center sm:text-left">
           <h3 className="text-lg font-medium text-foreground">Profile Picture</h3>
@@ -85,7 +120,7 @@ export function ProfileForm({ user, onSave }: ProfileFormProps) {
             Click on the avatar to upload a new profile picture.
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            JPG, PNG or GIF. Max size 2MB.
+            {isUploadingImage ? "Uploading image..." : "JPG, PNG or GIF. Max size 2MB."}
           </p>
         </div>
       </div>
@@ -153,8 +188,9 @@ export function ProfileForm({ user, onSave }: ProfileFormProps) {
 
       {/* Save Button */}
       <div className="flex justify-end border-t border-border pt-6">
-        <Button type="submit" disabled={isSaving}>
+        <Button type="submit" disabled={isSaving || isUploadingImage}>
           {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {isUploadingImage && !isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {isSaving ? "Saving..." : "Save Changes"}
         </Button>
       </div>

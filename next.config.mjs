@@ -6,6 +6,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  images: {
+    remotePatterns : [
+      {
+        protocol: "http",
+        hostname: "res.cloudinary.com"
+      }
+    ]
+  }
 }
 
 export default nextConfig

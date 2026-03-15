@@ -29,7 +29,6 @@ Inovice/
 │   │   │   │   └── page.tsx
 │   │   │   └── page.tsx
 │   │   ├── settings/
-│   │   │   ├── profile/
 │   │   │   └── page.tsx
 │   │   └── layout.tsx
 │   ├── (auth)/
@@ -174,6 +173,8 @@ Inovice/
 │   ├── use-payments.ts
 │   └── use-toast.ts
 ├── lib/
+│   ├── helpers/
+│   │   └── cloudinary.ts
 │   ├── dbConnect.ts
 │   ├── format.ts
 │   └── utils.ts
@@ -196,21 +197,6 @@ Inovice/
 │   │   ├── client.ts
 │   │   ├── expensesApi.ts
 │   │   └── invoices.ts
-│   ├── components/
-│   │   ├── clients/
-│   │   │   ├── client-form.tsx
-│   │   │   └── client-table.tsx
-│   │   ├── expenses/
-│   │   │   ├── expense-form.tsx
-│   │   │   └── expense-table.tsx
-│   │   ├── invoices/
-│   │   │   ├── invoice-form.tsx
-│   │   │   └── invoice-table.tsx
-│   │   ├── layout/
-│   │   │   ├── app-layout.tsx
-│   │   │   ├── header.tsx
-│   │   │   └── sidebar.tsx
-│   │   └── profile/
 │   ├── constants/
 │   │   └── api.ts
 │   ├── hooks/
@@ -219,20 +205,11 @@ Inovice/
 │   │   ├── use-expenses.ts
 │   │   ├── use-invoices.ts
 │   │   └── use-payments.ts
-│   ├── lib/
-│   │   ├── format.ts
-│   │   └── utils.ts
-│   ├── model/
-│   │   ├── invoice.ts
-│   │   └── user.ts
-│   ├── schema/
+│   └── schema/
 │   │   └── registerSchema.ts
-│   └── store/
-│   │   └── auth-context.tsx
 ├── styles/
 │   └── globals.css
 ├── components.json
-├── folder_structure.txt
 ├── next-env.d.ts
 ├── next.config.mjs
 ├── package-lock.json
